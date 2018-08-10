@@ -1,0 +1,56 @@
+{extend name="public/base" /}
+{block name="body"}
+<div class="main-title">
+    <h2>修改报修信息</h2>
+</div>
+<form action="{:url('edit')}" method="post">
+    <input type="hidden" name="id" value="{$info.id}">
+    <div class="form-item">
+        <label class="item-label"><span class="check-tips">标题</span></label>
+        <div class="controls">
+            <input type="text" class="text input-large" name="title" value="{$info.title}">
+        </div>
+    </div>
+    <div class="form-item">
+        <label class="item-label"><span class="check-tips">姓名</span></label>
+        <div class="controls">
+            <input type="text" class="text input-large" name="name" value="{$info.name}">
+        </div>
+    </div>
+    <div class="form-item">
+        <label class="item-label"><span class="check-tips">电话</span></label>
+        <div class="controls">
+            <input type="text" class="text input-large" name="tel" value="{$info.tel}">
+        </div>
+    </div>
+    <div class="form-item">
+        <label class="item-label"><span class="check-tips">地址</span></label>
+        <div class="controls">
+            <input type="text" class="text input-large" name="address" value="{$info.address}">
+        </div>
+    </div>
+
+    <!--<div class="form-item">-->
+        <!--<label class="item-label"><span class="check-tips">时间</span></label>-->
+        <!--<div class="controls">-->
+            <!--<input type="text" class="text input-large" name="time" value="{$info.time}">-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="form-item">
+        <label class="item-label"><span class="check-tips">内容</span></label>
+        <div class="controls">
+            <input type="text" class="text input-large" name="content" value="{$info.content}">
+        </div>
+    </div>
+    <br>
+    <!--<input type="submit" value="立即提交">-->
+    <button class="btn submit-btn ajax-posts"  type="submit" target-form="form-horizontal">确 定</button>
+</form>
+{/block}
+
+{block name="script"}
+<script type="text/javascript">
+    //导航高亮
+//    highlight_subnav('{:url('User/index')}';
+</script>
+{/block}
