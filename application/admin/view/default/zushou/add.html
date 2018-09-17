@@ -1,0 +1,60 @@
+{extend name="public/base" /}
+{block name="body"}
+<div class="main-title">
+    <h2>添加报修</h2>
+</div>
+<form action="{:url('add')}" method="post" enctype="multipart/form-data">
+
+    <div class="form-item">
+        <label class="item-label"><span class="check-tips">类型</span></label>
+        <div class="controls">
+            <label>出租:<input type="radio" name="type" value="1"></label>
+            <label>出售:<input type="radio" name="type" value="0"></label>
+        </div>
+    </div>
+
+    <div class="form-item">
+        <label class="item-label"><span class="check-tips">价格</span></label>
+        <div class="controls">
+            <input type="text" class="text input-large" name="price" value="">
+        </div>
+    </div>
+
+    <div class="form-item">
+        <label class="item-label"><span class="check-tips">电话</span></label>
+        <div class="controls">
+            <input type="text" class="text input-large" name="tel" value="">
+        </div>
+    </div>
+
+    <div class="form-item">
+        <label class="item-label"><span class="check-tips">简介</span></label>
+        <div class="controls">
+            <input type="text" class="text input-large" name="des" value="">
+        </div>
+    </div>
+
+    <div class="form-item">
+        <label class="textarea">
+            <textarea name="{$field.content}">{$field.value}</textarea>
+            {:hook('adminArticleEdit', array('name'=>$field['name'],'value'=>$field['value']))}
+        </label>
+    </div>
+
+    <!--<label class="textarea">-->
+        <!--<textarea name="{$field.name}">{$field.value}</textarea>-->
+        <!--{:hook('adminArticleEdit', array('name'=>$field['name'],'value'=>$field['value']))}-->
+    <!--</label>-->
+
+
+    <br>
+    <button class="btn submit-btn ajax-posts"  type="submit" target-form="form-horizontal">确 定</button>
+</form>
+{/block}
+
+{block name="script"}
+<script type="text/javascript">
+    //导航高亮
+//    highlight_subnav('{:url('User/index')}';
+</script>
+{/block}
