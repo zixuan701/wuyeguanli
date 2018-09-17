@@ -22,6 +22,8 @@
         .indexLabel{padding: 10px 0; margin: 10px 0 0; color: #fff;}
     </style>
 </head>
+<!--导航加载-->
+{include file="nav.html"}
 <body>
 
     <div class="container-fluid">
@@ -32,12 +34,16 @@
         <div class="noticeDetailContent">
             {$info.content}
         </div>
-        {article:prev name="prev" info="info"}
-        <a href="{:url('',array('id'=>$prev['id']))}">上一篇</a>
-        {/article:prev}
-        {article:next name="next" info="info"}
-        <a href="{:url('?id='.$next['id'])}">下一篇</a>
-        {/article:next}
+        <span id="btn">
+
+        </span>
+
+        <!--{article:prev name="prev" info="info"}-->
+        <!--<a href="{:url('',array('id'=>$prev['id']))}">上一篇</a>-->
+        <!--{/article:prev}-->
+        <!--{article:next name="next" info="info"}-->
+        <!--<a href="{:url('?id='.$next['id'])}">下一篇</a>-->
+        <!--{/article:next}-->
     </div>
 <!--</div>-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -46,3 +52,21 @@
 <script src="/static2/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<script type="text/javascript">
+
+$(function () {
+
+    category_id={$category.id};
+    activity_id={$info.id};
+        if(category_id===48){
+           $("#btn").append("<button id='btn2' class='btn btn-success btn-block'>立即报名</button>");
+            $("#btn2").click(function () {
+                $.get("/home/Activity/activity",{'activity_id':activity_id},function (data) {
+//                    console.log(data)
+                    alert(data['msg'])
+                })
+            })
+        }
+})
+</script>

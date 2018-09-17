@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:78:"D:\phpStudy\WWW\tp5\public/../application/home/view/default/article\lists.html";i:1533873776;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:78:"D:\phpStudy\WWW\tp5\public/../application/home/view/default/article\lists.html";i:1534058577;s:8:"nav.html";i:1534058653;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -23,33 +23,54 @@
         .indexLabel{padding: 10px 0; margin: 10px 0 0; color: #fff;}
     </style>
 </head>
-<body>
-
-<section id="contents">
-    <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$data): $mod = ($i % 2 );++$i;?>
-    <div class="row noticeList">
-        <div class="col-xs-2">
-            <a href="<?php echo url('Article/detail?id='.$data['id']); ?>"><img class="img-thumbnail" src="__ROOT__<?php echo get_cover_path($data['cover_id']); ?>" /></a>
+<!--导航加载-->
+<!--导航部分-->
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid text-center">
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">首页</a></p>
         </div>
-        <div class="col-xs-10">
-            <h3 class="ellipsis"><a href="<?php echo url('Article/detail?id='.$data['id']); ?>"><?php echo $data['title']; ?></a></h3>
-            <p class="lead"><?php echo $data['description']; ?></p>
-            <span><a href="<?php echo url('Article/detail?id='.$data['id']); ?>">查看全文</a></span>
-            <span class="pull-right">
-											<span class="author"><?php echo get_username($data['uid']); ?></span>&nbsp;&nbsp;
-											<span>发表于 <?php echo $data['create_time']; ?></span>
-											<span>阅读(<?php echo $data['view']; ?>)</span>&nbsp;&nbsp;
-										</span>
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('home/fuwu/index'); ?>" class="navbar-link">服务</a></p>
         </div>
-        <hr/>
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
+        </div>
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('home/my/index'); ?>" class="navbar-link">我的</a></p>
+        </div>
     </div>
-    <?php endforeach; endif; else: echo "" ;endif; ?>
-    <!--<div class="twothink pagination pagination-right pagination-large">-->
-        <!--<?php $__PAGE__ = \think\Db::name('Document')->paginate($category['list_row'],get_list_count($category['id']));echo $__PAGE__->render(); ?>-->
-    <!--</div>-->
-</section>
-<div id="apd"></div>
-<div style="text-align: center" id="getlist">获取更多通知...</div>
+</nav>
+<!--导航结束-->
+<body>
+    <div class="container-fluid">
+
+        <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$data): $mod = ($i % 2 );++$i;?>
+
+        <div class="article_list">
+            <div class="row noticeList">
+                <a href="<?php echo url('Article/detail?id='.$data['id']); ?>">
+                    <div class="col-xs-2">
+                        <img class="noticeImg" src="__ROOT__<?php echo get_cover_path($data['cover_id']); ?>" />
+                    </div>
+                    <div class="col-xs-10">
+                        <p class="title" href="<?php echo url('Article/detail?id='.$data['id']); ?>"><?php echo $data['title']; ?></p>
+                        <p class="intro"><?php echo get_username($data['uid']); ?></p>
+                        <p class="info">浏览: <?php echo $data['view']; ?> <span class="pull-right"><?php echo $data['create_time']; ?></span> </p>
+                    </div>
+                </a>
+            </div>
+            <?php endforeach; endif; else: echo "" ;endif; ?>
+            <div id="apd">
+
+            </div>
+            <span id="getlist">
+                <button class="btn btn-default btn-block get_more" id="btn">获取更多。。。</button>
+            </span>
+        </div>
+    </div>
+<!--</section>-->
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/static2/jquery-1.11.2.min.js"></script>
@@ -58,17 +79,19 @@
 
 <script type="text/javascript">
     $(function () {
-
-        var page=1;
+        var page=2;
+        category=<?php echo $category['id']; ?>;
         $("#getlist").click(function () {
-            $.get( "/home/article/getList?page="+page+"&category=42",function (date) {
-               $("#apd").append(date);
-            });
+            $.get( "/home/article/lists?page="+page+"&category="+category,function (date) {
+                if (date===''){
+                    $("#apd").append('<div style="text-align: center">没有更多信息...</div>');
+                    $("#getlist").remove();
+                }else{
+                    $("#apd").append(date);
+                }
+         });
             page++;
         });
-
-
-
 
     })
 </script>

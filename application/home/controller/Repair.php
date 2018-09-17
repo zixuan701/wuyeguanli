@@ -9,6 +9,7 @@
 namespace app\home\controller;
 
 
+use think\Db;
 use think\Validate;
 
 class Repair extends Home
@@ -38,12 +39,13 @@ class Repair extends Home
         ];
         $vaildate=new Validate($rule,$msg);
 
-        //调用validate里面的模型验证
-//        $vaildate=validate('repair');
-
         if ($this->request->isPost()){
             $datas=$this->request->post();
             $datas['time']=time();
+            $datas['status']=0;
+            session_start();
+            $uid = $_SESSION['twothink_home']['user_auth']['uid'];
+            $datas['uid']=$uid;
             if(!$vaildate->check($datas)){
                 return $this->error($vaildate->getError());
             }
@@ -55,15 +57,20 @@ class Repair extends Home
                 $this->error($repair->getError());
             }
         }else{
+            //判断登录
+//            if(!is_login()){
+//                return $this->error('您未登录,请先登录','user/login/index');
+//            }
+            //判断有没有认证
+            session_start();
+            $uid = $_SESSION['twothink_home']['user_auth']['uid'];
+            $status=Db::table('renzheng')->where('uid',$uid)->find()['status'];
+            if ($status===null||$status!=1){
+                return $this->error('请先提交业主认证信息,审核通过即可在线报修','home/fuwu/renzheng');
+            }
             $this->assign('meta_title', '添加报修');
             return $this->fetch('add');
         }
     }
 
-
-//    public function test()
-//    {
-//            $a=new \app\admin\Controller\Repair();
-//            $a->add();
-//    }
 }

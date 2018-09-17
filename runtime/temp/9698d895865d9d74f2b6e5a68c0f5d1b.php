@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:87:"D:\phpStudy\WWW\tp5\public/../application/home/view/default/article\article\detail.html";i:1533809716;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:87:"D:\phpStudy\WWW\tp5\public/../application/home/view/default/article\article\detail.html";i:1534058577;s:8:"nav.html";i:1534058653;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -23,6 +23,25 @@
         .indexLabel{padding: 10px 0; margin: 10px 0 0; color: #fff;}
     </style>
 </head>
+<!--导航加载-->
+<!--导航部分-->
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid text-center">
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">首页</a></p>
+        </div>
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('home/fuwu/index'); ?>" class="navbar-link">服务</a></p>
+        </div>
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
+        </div>
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('home/my/index'); ?>" class="navbar-link">我的</a></p>
+        </div>
+    </div>
+</nav>
+<!--导航结束-->
 <body>
 
     <div class="container-fluid">
@@ -33,11 +52,16 @@
         <div class="noticeDetailContent">
             <?php echo $info['content']; ?>
         </div>
-        <?php $prev = model('Document')->prev($info); if(!(empty($prev) || (($prev instanceof \think\Collection || $prev instanceof \think\Paginator ) && $prev->isEmpty()))): ?>
-        <a href="<?php echo url('',array('id'=>$prev['id'])); ?>">上一篇</a>
-        <?php endif; $next = model('Document')->next($info); if(!(empty($next) || (($next instanceof \think\Collection || $next instanceof \think\Paginator ) && $next->isEmpty()))): ?>
-        <a href="<?php echo url('?id='.$next['id']); ?>">下一篇</a>
-        <?php endif; ?>
+        <span id="btn">
+
+        </span>
+
+        <!--<?php $prev = model('Document')->prev($info); if(!(empty($prev) || (($prev instanceof \think\Collection || $prev instanceof \think\Paginator ) && $prev->isEmpty()))): ?>-->
+        <!--<a href="<?php echo url('',array('id'=>$prev['id'])); ?>">上一篇</a>-->
+        <!--<?php endif; ?>-->
+        <!--<?php $next = model('Document')->next($info); if(!(empty($next) || (($next instanceof \think\Collection || $next instanceof \think\Paginator ) && $next->isEmpty()))): ?>-->
+        <!--<a href="<?php echo url('?id='.$next['id']); ?>">下一篇</a>-->
+        <!--<?php endif; ?>-->
     </div>
 <!--</div>-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -46,3 +70,21 @@
 <script src="/static2/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<script type="text/javascript">
+
+$(function () {
+
+    category_id=<?php echo $category['id']; ?>;
+    activity_id=<?php echo $info['id']; ?>;
+        if(category_id===48){
+           $("#btn").append("<button id='btn2' class='btn btn-success btn-block'>立即报名</button>");
+            $("#btn2").click(function () {
+                $.get("/home/Activity/activity",{'activity_id':activity_id},function (data) {
+//                    console.log(data)
+                    alert(data['msg'])
+                })
+            })
+        }
+})
+</script>

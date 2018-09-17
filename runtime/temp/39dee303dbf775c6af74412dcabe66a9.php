@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:78:"D:\phpStudy\WWW\tp5\public/../application/admin/view/default/article\edit.html";i:1496373782;s:77:"D:\phpStudy\WWW\tp5\public/../application/admin/view/default/public\base.html";i:1496373782;s:82:"D:\phpStudy\WWW\tp5\public/../application/admin/view/default/article\sidemenu.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:78:"D:\phpStudy\WWW\tp5\public/../application/admin/view/default/article\edit.html";i:1534081941;s:77:"D:\phpStudy\WWW\tp5\public/../application/admin/view/default/public\base.html";i:1496373782;s:82:"D:\phpStudy\WWW\tp5\public/../application/admin/view/default/article\sidemenu.html";i:1496373782;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -241,8 +241,7 @@
                                 	</label>
                                 <?php endforeach; endif; else: echo "" ;endif; break; case "editor": ?>
                                 <label class="textarea">
-                                <textarea name="<?php echo $field['name']; ?>"><?php echo $data[$field['name']]; ?></textarea>
-                                <?php echo hook('adminArticleEdit', array('name'=>$field['name'],'value'=>$data[$field['name']])); ?>
+                                <textarea name="content"></textarea>
                                 </label>
                             <?php break; case "function": 
                         $hook_arr = parse_function_attr($field['extra'],$data[$field['name']]);

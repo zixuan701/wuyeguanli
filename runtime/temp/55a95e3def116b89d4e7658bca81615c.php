@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:76:"D:\phpStudy\WWW\tp5\public/../application/home/view/default/index\index.html";i:1533813832;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:76:"D:\phpStudy\WWW\tp5\public/../application/home/view/default/index\index.html";i:1534083580;s:8:"nav.html";i:1534058653;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -25,20 +25,21 @@
 </head>
 <body>
 <div class="main">
-<!--导航部分-->
+    <!--导航加载-->
+    <!--导航部分-->
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid text-center">
         <div class="col-xs-3">
-            <p class="navbar-text"><a href="index.html" class="navbar-link">首页</a></p>
+            <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">首页</a></p>
         </div>
         <div class="col-xs-3">
-            <p class="navbar-text"><a href="fuwu.html" class="navbar-link">服务</a></p>
+            <p class="navbar-text"><a href="<?php echo url('home/fuwu/index'); ?>" class="navbar-link">服务</a></p>
         </div>
         <div class="col-xs-3">
             <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
         </div>
         <div class="col-xs-3">
-            <p class="navbar-text"><a href="my.html" class="navbar-link">我的</a></p>
+            <p class="navbar-text"><a href="<?php echo url('home/my/index'); ?>" class="navbar-link">我的</a></p>
         </div>
     </div>
 </nav>
@@ -51,6 +52,7 @@
     <div class="serviceList text-center">
         <div class="container">
             <div class="row">
+
                 <div class="col-xs-4">
                     <a href="<?php echo url('article/lists?category=42'); ?>">
                     <div class="indexLabel label-danger">
@@ -59,6 +61,7 @@
                     </div>
                     </a>
                 </div>
+
                 <div class="col-xs-4">
                     <a href="<?php echo url('article/lists?category=2'); ?>">
                     <div class="indexLabel label-warning">
@@ -67,6 +70,7 @@
                     </div>
                     </a>
                 </div>
+
                 <div class="col-xs-4">
                     <a href="<?php echo url('repair/add'); ?>">
                     <div class="indexLabel label-info">
@@ -75,38 +79,40 @@
                     </div>
                     </a>
                 </div>
+
                 <div class="col-xs-4">
-                    <a href="notice.html">
+                    <a href="<?php echo url('article/lists?category=47'); ?>">
                     <div class="indexLabel label-success">
                     <span class="glyphicon glyphicon-briefcase"></span><br/>
                     商家活动
                     </div>
                     </a>
                 </div>
+
                 <div class="col-xs-4">
-                    <a href="zushou.html">
+                    <a href="<?php echo url('zushou/index'); ?>">
                     <div class="indexLabel label-primary">
                     <span class="glyphicon glyphicon-usd"></span><br/>
                     小区租售
                     </div>
                     </a>
                 </div>
+
                 <div class="col-xs-4">
-                    <a href="notice.html">
+                <a href="<?php echo url('article/lists?category=48'); ?>">
                     <div class="indexLabel label-default">
                         <span class="glyphicon glyphicon-apple"></span><br/>
                         小区活动
                     </div>
-                    </a>
-                </div>
+                </a>
             </div>
         </div>
     </div>
 </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../jquery-1.11.2.min.js"></script>
+<script src="/static2/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script src="/static2/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

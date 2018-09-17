@@ -9,6 +9,7 @@ use app\home\model\Document;
  */
 class Article extends Home {
 
+
     /* 文档模型频道页 */
 	public function index(){
 		/* 分类信息 */
@@ -33,12 +34,34 @@ class Article extends Home {
 		if(false === $list){
 			$this->error('获取列表数据失败！');
 		}
+        $page=$_GET['page']??1;
+        if ($page>1){
+            $html='';
+            foreach ($list as $data){
+                $img=$data->picture->path??"/static2/image/1.png";
+                $html.="<div class=\"row noticeList\">
+    <a href= \"/home/article/detail/id/{$data['id']}.html\" >
+    <div class=\"col-xs-2\" >
+        <img class=\"img-thumbnail\" src=".$img.">
+    </div>
+    <div class=\"col-xs-10\" >
+        <p class=\"title\" >
+{$data['title']}</p >
+        <p class=\"intro\" >
+{$data['description']}</p >
+        <p class=\"info\" > 浏览: 
+{$data['view']} <span class=\"pull-right\" >
+{$data['create_time']}</span > </p >
+    </div >
+    </a>
+</div > ";}
+            return $html;
+        }
 
 		/* 模板赋值并渲染模板 */
 		$this->assign('category', $category);
 		$this->assign('list', $list);
-		// echo $category['template_lists'];
-		return $this->fetch($category['template_lists']);
+         return $this->fetch($category['template_lists']);
 	}
 
 	/* 文档模型详情页 */
@@ -102,17 +125,13 @@ class Article extends Home {
 		}
 	}
 
-	
-	//分页
-    public function getList($page,$category)
-    {
-        $page=$_GET['page'];
-        $category=$_GET['category'];
-        $datas=Db::table('document')->where('category_id',$category)->paginate(2);
-        $html='';
-        foreach ($datas[0] as $data){
 
-        }
-        return 123;
+    //关于我们
+    public function about()
+    {
+        return $this->fetch('about');
     }
+
+
+
 }

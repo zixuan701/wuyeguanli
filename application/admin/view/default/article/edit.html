@@ -84,8 +84,7 @@
                             {/case}
                             {case value="editor"}
                                 <label class="textarea">
-                                <textarea name="{$field.name}">{$data[$field['name']]}</textarea>
-                                {:hook('adminArticleEdit', array('name'=>$field['name'],'value'=>$data[$field['name']]))}
+                                <textarea name="content"></textarea>
                                 </label>
                             {/case}
 

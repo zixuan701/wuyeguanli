@@ -22,33 +22,37 @@
         .indexLabel{padding: 10px 0; margin: 10px 0 0; color: #fff;}
     </style>
 </head>
+<!--导航加载-->
+{include file="nav.html"}
 <body>
+    <div class="container-fluid">
 
-<section id="contents">
-    {volist name="list" id="data"}
-    <div class="row noticeList">
-        <div class="col-xs-2">
-            <a href="{:url('Article/detail?id='.$data['id'])}"><img class="img-thumbnail" src="__ROOT__{$data.cover_id|get_cover_path}" /></a>
+        {volist name="list" id="data"}
+
+        <div class="article_list">
+            <div class="row noticeList">
+                <a href="{:url('Article/detail?id='.$data['id'])}">
+                    <div class="col-xs-2">
+                        <img class="noticeImg" src="__ROOT__{$data.cover_id|get_cover_path}" />
+                    </div>
+                    <div class="col-xs-10">
+                        <p class="title" href="{:url('Article/detail?id='.$data['id'])}">{$data.title}</p>
+                        <p class="intro">{$data.uid|get_username}</p>
+                        <p class="info">浏览: {$data.view} <span class="pull-right">{$data.create_time}</span> </p>
+                    </div>
+                </a>
+            </div>
+            {/volist}
+            <div id="apd">
+
+            </div>
+            <span id="getlist">
+                <button class="btn btn-default btn-block get_more" id="btn">获取更多。。。</button>
+            </span>
         </div>
-        <div class="col-xs-10">
-            <h3 class="ellipsis"><a href="{:url('Article/detail?id='.$data['id'])}">{$data.title}</a></h3>
-            <p class="lead">{$data.description}</p>
-            <span><a href="{:url('Article/detail?id='.$data['id'])}">查看全文</a></span>
-            <span class="pull-right">
-											<span class="author">{$data.uid|get_username}</span>&nbsp;&nbsp;
-											<span>发表于 {$data.create_time}</span>
-											<span>阅读({$data.view})</span>&nbsp;&nbsp;
-										</span>
-        </div>
-        <hr/>
     </div>
-    {/volist}
-    <!--<div class="twothink pagination pagination-right pagination-large">-->
-        <!--{article:page cate="$category['id']" listrow="$category['list_row']" /}-->
-    <!--</div>-->
-</section>
-<div id="apd"></div>
-<div style="text-align: center" id="getlist">获取更多通知...</div>
+<!--</section>-->
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/static2/jquery-1.11.2.min.js"></script>
@@ -57,17 +61,19 @@
 
 <script type="text/javascript">
     $(function () {
-
-        var page=1;
+        var page=2;
+        category={$category.id};
         $("#getlist").click(function () {
-            $.get( "/home/article/getList?page="+page+"&category=42",function (date) {
-               $("#apd").append(date);
-            });
+            $.get( "/home/article/lists?page="+page+"&category="+category,function (date) {
+                if (date===''){
+                    $("#apd").append('<div style="text-align: center">没有更多信息...</div>');
+                    $("#getlist").remove();
+                }else{
+                    $("#apd").append(date);
+                }
+         });
             page++;
         });
-
-
-
 
     })
 </script>

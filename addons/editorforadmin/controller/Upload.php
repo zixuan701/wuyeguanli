@@ -29,7 +29,7 @@ class Upload extends Addons{
             if($info){
                 // 成功上传后 获取上传信息
                 $url =  __ROOT__.$info->getPath();
-                $url = str_replace('./', '/', $url);
+                $url = str_replace(['./',DS], '/', $url);
                 $savepath= basename($url);
                 $savename = $info->getFilename();
                 $fullpath= __ROOT__.$url.'/'.$savename;

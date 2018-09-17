@@ -19,3 +19,4 @@ return [
     ],
     'home/addons/:_addons/:_controller/:_action' => 'home/addons/execute',//插件执行路由
 ];
+
